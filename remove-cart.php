@@ -1,10 +1,10 @@
 <?php
 
-session_start();
+    session_start();
 
-$id = $_GET['id'];
+    $id = $_GET['id'];
 
-unset($_SESSION['cart'][$id]);
+    unset($_SESSION['cart'][$id]);
 
-header("Location: cart.php");
-exit();
+    header("Location: cart.php");
+    exit();

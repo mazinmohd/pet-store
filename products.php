@@ -14,14 +14,12 @@
     <title>Products | PetVerse</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style2.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-
     <nav class="navbar">
 
         <div class="logo">
@@ -31,7 +29,7 @@
 
         <ul class="nav-links">
             <li><a href="index.php">Home</a></li>
-            <li><a href="products.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='products.php') echo 'active'; ?>">Product</a></li>
+            <li><a href="products.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='products.php') echo 'active'; ?>">Products</a></li>
             <li><a href="cart.php">Cart</a></li>
             <li><a href="my-orders.php">Orders</a></li>
         </ul>
@@ -75,7 +73,6 @@
         <?php } ?>
 
     </nav>
-
 </header>
 
 <section class="page-title">

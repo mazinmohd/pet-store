@@ -10,12 +10,9 @@
     <title>PetVerse Store</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style2.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
-<!-- Header -->
 
 <header>
 
@@ -215,6 +212,7 @@
             <h4>- David</h4>
 
         </div>
+
         <div class="testimonial">
 
             <p>
@@ -294,12 +292,12 @@
 
     </div>
 
-        <div class="footer-bottom">
-            <p>
+    <div class="footer-bottom">
+        <p>
             © 2026 PetVerse Store.
             All Rights Reserved.
-            </p>
-        </div>
+        </p>
+    </div>
 
 </footer>
 

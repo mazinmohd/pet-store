@@ -1,131 +1,125 @@
 <?php
 
-session_start();
-include 'includes/db.php';
+    session_start();
+    include 'includes/db.php';
 
-$message = "";
+    $message = "";
 
-if (isset($_POST['login'])) {
+    if (isset($_POST['login'])) {
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-    $query =
-        mysqli_query(
-            $conn,
-            "SELECT * FROM users
-         WHERE email='$email'"
-        );
+        $query =
+            mysqli_query(
+                $conn,
+                "SELECT * FROM users
+            WHERE email='$email'"
+            );
 
-    if (mysqli_num_rows($query) == 1) {
+        if (mysqli_num_rows($query) == 1) {
 
-        $user =
-            mysqli_fetch_assoc($query);
+            $user =
+                mysqli_fetch_assoc($query);
 
-        if (
-            password_verify(
-                $password,
-                $user['password']
-            )
-        ) {
+            if (
+                password_verify(
+                    $password,
+                    $user['password']
+                )
+            ) {
 
-            $_SESSION['user_id']
-                = $user['id'];
+                $_SESSION['user_id']
+                    = $user['id'];
 
-            $_SESSION['user_name']
-                = $user['fullname'];
+                $_SESSION['user_name']
+                    = $user['fullname'];
 
-            $_SESSION['message'] = "Welcome back, ".$user['fullname']."!";
+                $_SESSION['message'] = "Welcome back, ".$user['fullname']."!";
 
-            header("Location: index.php");
-            exit();
+                header("Location: index.php");
+                exit();
+            } else {
+
+                $message =
+                    "Invalid password";
+            }
         } else {
 
             $message =
-                "Invalid password";
+                "Account not found";
         }
-    } else {
-
-        $message =
-            "Account not found";
     }
-}
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-
     <title>Login</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style2.css">
-
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
+    <header>
 
-    <!-- Your Header -->
+        <nav class="navbar">
 
-<header>
-
-    <nav class="navbar">
-
-    <div class="logo">
-        <i class="fa-solid fa-paw"></i>
-        PetVerse
-    </div>
-
-    <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Products</a></li>
-        <li><a href="cart.php">Cart</a></li>
-        <li><a href="my-orders.php">Orders</a></li>
-    </ul>
-
-    <?php if(isset($_SESSION['user_id'])){ ?>
-
-    <div class="user-menu">
-
-        <div class="user-profile">
-
-            <div class="user-avatar">
-                <?php echo strtoupper(substr($_SESSION['user_name'],0,1)); ?>
+            <div class="logo">
+                <i class="fa-solid fa-paw"></i>
+                PetVerse
             </div>
 
-            <span class="user-name">
-                <?php echo $_SESSION['user_name']; ?>
-            </span>
+            <ul class="nav-links">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="cart.php">Cart</a></li>
+                <li><a href="my-orders.php">Orders</a></li>
+            </ul>
 
-        </div>
+            <?php if(isset($_SESSION['user_id'])){ ?>
 
-        <a href="logout.php" class="logout-btn">
-            Logout
-        </a>
+            <div class="user-menu">
 
-    </div>
+                <div class="user-profile">
 
-    <?php } else { ?>
+                    <div class="user-avatar">
+                        <?php echo strtoupper(substr($_SESSION['user_name'],0,1)); ?>
+                    </div>
 
-    <div class="guest-menu">
+                    <span class="user-name">
+                        <?php echo $_SESSION['user_name']; ?>
+                    </span>
 
-        <a href="login.php" class="login-btn">
-            Login
-        </a>
+                </div>
 
-        <a href="register.php" class="register-btn">
-            Register
-        </a>
+                <a href="logout.php" class="logout-btn">
+                    Logout
+                </a>
 
-    </div>
+            </div>
 
-    <?php } ?>
+            <?php } else { ?>
 
-</nav>
+            <div class="guest-menu">
 
-</header>
+                <a href="login.php" class="login-btn">
+                    Login
+                </a>
+
+                <a href="register.php" class="register-btn">
+                    Register
+                </a>
+
+            </div>
+
+            <?php } ?>
+
+        </nav>
+
+    </header>
 
 
     <section class="auth-container">
@@ -179,7 +173,6 @@ if (isset($_POST['login'])) {
 
     </section>
 
-    <!-- Your Footer -->
     <footer>
 
         <div class="footer-container">
@@ -234,7 +227,5 @@ if (isset($_POST['login'])) {
         </div>
 
     </footer>
-
 </body>
-
 </html>

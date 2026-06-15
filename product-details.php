@@ -33,14 +33,12 @@
     <title><?php echo $product['name']; ?></title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style2.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-
     <nav class="navbar">
 
         <div class="logo">
@@ -94,7 +92,6 @@
         <?php } ?>
 
     </nav>
-
 </header>
 
 

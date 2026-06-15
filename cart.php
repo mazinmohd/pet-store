@@ -34,7 +34,6 @@
     <title>Shopping Cart</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/style2.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -225,15 +224,11 @@
 
                 </div>
 
-                <a
-                href="checkout.php"
-                class="checkout-btn">
+                <a href="checkout.php" class="checkout-btn">
                     Proceed To Checkout
                 </a>
 
-                <a
-                href="products.php"
-                class="continue-btn">
+                <a href="products.php" class="continue-btn">
                     Continue Shopping
                 </a>
 
@@ -248,7 +243,7 @@
             <p>
                 Looks like you haven't added any pets yet.
             </p>
-            <a href="products.php" class="btn">
+            <a href="products.php" class="btn empty-btn">
                 Browse Products
             </a>
         </div>

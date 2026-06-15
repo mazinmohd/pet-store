@@ -1,22 +1,22 @@
 <?php
 
-session_start();
-include 'includes/db.php';
+    session_start();
+    include 'includes/db.php';
 
-if(!isset($_SESSION['user_id'])){
-    header("Location: login.php");
-    exit();
-}
+    if(!isset($_SESSION['user_id'])){
+        header("Location: login.php");
+        exit();
+    }
 
-$user_id = $_SESSION['user_id'];
+    $user_id = $_SESSION['user_id'];
 
-$orders =
-mysqli_query(
-$conn,
-"SELECT * FROM orders
-WHERE user_id='$user_id'
-ORDER BY id DESC"
-);
+    $orders =
+    mysqli_query(
+    $conn,
+    "SELECT * FROM orders
+    WHERE user_id='$user_id'
+    ORDER BY id DESC"
+    );
 
 ?>
 
@@ -25,70 +25,67 @@ ORDER BY id DESC"
 
 <head>
 
-<title>My Orders</title>
+    <title>My Orders</title>
 
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/style2.css">
-
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-
-<!-- YOUR HEADER -->
 
 <header>
 
     <nav class="navbar">
 
-    <div class="logo">
-        <i class="fa-solid fa-paw"></i>
-        PetVerse
-    </div>
+        <div class="logo">
+            <i class="fa-solid fa-paw"></i>
+            PetVerse
+        </div>
 
-    <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-        <li><a href="products.php">Products</a></li>
-        <li><a href="cart.php">Cart</a></li>
-        <li><a href="index.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='my-orders.php') echo 'active'; ?>">Orders</a></li>
-    </ul>
+        <ul class="nav-links">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="products.php">Products</a></li>
+            <li><a href="cart.php">Cart</a></li>
+            <li><a href="index.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='my-orders.php') echo 'active'; ?>">Orders</a></li>
+        </ul>
 
-    <?php if(isset($_SESSION['user_id'])){ ?>
+        <?php if(isset($_SESSION['user_id'])){ ?>
 
-    <div class="user-menu">
+        <div class="user-menu">
 
-        <div class="user-profile">
+            <div class="user-profile">
 
-            <div class="user-avatar">
-                <?php echo strtoupper(substr($_SESSION['user_name'],0,1)); ?>
+                <div class="user-avatar">
+                    <?php echo strtoupper(substr($_SESSION['user_name'],0,1)); ?>
+                </div>
+
+                <span class="user-name">
+                    <?php echo $_SESSION['user_name']; ?>
+                </span>
+
             </div>
 
-            <span class="user-name">
-                <?php echo $_SESSION['user_name']; ?>
-            </span>
+            <a href="logout.php" class="logout-btn">
+                Logout
+            </a>
 
         </div>
 
-        <a href="logout.php" class="logout-btn">
-            Logout
-        </a>
+        <?php } else { ?>
 
-    </div>
+        <div class="guest-menu">
 
-    <?php } else { ?>
+            <a href="login.php" class="login-btn">
+                Login
+            </a>
 
-    <div class="guest-menu">
+            <a href="register.php" class="register-btn">
+                Register
+            </a>
 
-        <a href="login.php" class="login-btn">
-            Login
-        </a>
+        </div>
 
-        <a href="register.php" class="register-btn">
-            Register
-        </a>
-
-    </div>
-
-    <?php } ?>
+        <?php } ?>
 
     </nav>
 
@@ -109,86 +106,86 @@ ORDER BY id DESC"
 
         <div class="order-card">
 
-        <div class="order-header">
+            <div class="order-header">
 
-        <h3>
-        Order #<?php echo $order['id']; ?>
-        </h3>
+                <h3>
+                Order #<?php echo $order['id']; ?>
+                </h3>
 
-        <span>
-        <?php echo $order['order_date']; ?>
-        </span>
+                <span>
+                <?php echo $order['order_date']; ?>
+                </span>
 
-        </div>
+            </div>
 
-        <div class="order-body">
+            <div class="order-body">
 
-        <p>
+                <p>
 
-        <strong>Name:</strong>
+                <strong>Name:</strong>
 
-        <?php echo $order['customer_name']; ?>
+                <?php echo $order['customer_name']; ?>
 
-        </p>
+                </p>
 
-        <p>
+                <p>
 
-        <strong>Total:</strong>
+                <strong>Total:</strong>
 
-        $<?php echo number_format($order['total_amount'],2); ?>
+                $<?php echo number_format($order['total_amount'],2); ?>
 
-        </p>
+                </p>
 
-        <p>
+                <p>
 
-        <strong>Address:</strong>
+                <strong>Address:</strong>
 
-        <?php echo $order['address']; ?>
+                <?php echo $order['address']; ?>
 
-        </p>
+                </p>
 
-        </div>
+            </div>
 
-        <h4>Products</h4>
+            <h4>Products</h4>
 
-        <?php
+            <?php
 
-        $order_id = $order['id'];
+                $order_id = $order['id'];
 
-        $items =
-        mysqli_query(
-        $conn,
-        "SELECT
-        order_items.*,
-        products.name
-        FROM order_items
-        JOIN products
-        ON order_items.product_id = products.id
-        WHERE order_items.order_id='$order_id'"
-        );
+                $items =
+                mysqli_query(
+                $conn,
+                "SELECT
+                order_items.*,
+                products.name
+                FROM order_items
+                JOIN products
+                ON order_items.product_id = products.id
+                WHERE order_items.order_id='$order_id'"
+                );
 
-        while($item = mysqli_fetch_assoc($items)){
+                while($item = mysqli_fetch_assoc($items)){
 
-        ?>
+            ?>
 
-        <div class="order-item">
+            <div class="order-item">
 
-        <span>
+                <span>
 
-        <?php echo $item['name']; ?>
+                    <?php echo $item['name']; ?>
 
-        </span>
+                </span>
 
-        <span>
+                <span>
 
-        Qty:
-        <?php echo $item['quantity']; ?>
+                    Qty:
+                    <?php echo $item['quantity']; ?>
 
-        </span>
+                </span>
 
-        </div>
+            </div>
 
-        <?php } ?>
+            <?php } ?>
 
         </div>
 
@@ -202,17 +199,17 @@ ORDER BY id DESC"
 
         <div class="empty-orders">
 
-        <h2>No Orders Yet</h2>
+            <h2>No Orders Yet</h2>
 
-        <p>
-        Start shopping to see your orders here.
-        </p>
+            <p>
+            Start shopping to see your orders here.
+            </p>
 
-        <a href="products.php" class="btn">
+            <a href="products.php" class="btn">
 
-        Browse Products
+            Browse Products
 
-        </a>
+            </a>
 
         </div>
 
@@ -220,59 +217,53 @@ ORDER BY id DESC"
 
     </section>
 </main>
-<!-- YOUR FOOTER -->
 <footer>
 
-<div class="footer-container">
+    <div class="footer-container">
 
-<div class="footer-section">
+        <div class="footer-section">
 
-<h3>PetVerse Store</h3>
+            <h3>PetVerse Store</h3>
 
-<p>
-Your trusted online destination
-for pets and pet supplies.
-</p>
+            <p>
+            Your trusted online destination
+            for pets and pet supplies.
+            </p>
 
-</div>
+        </div>
 
-<div class="footer-section">
+        <div class="footer-section">
 
-<h3>Quick Links</h3>
+            <h3>Quick Links</h3>
 
-<ul>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="cart.php">Cart</a></li>
+                <li><a href="login.php">Login</a></li>
 
-<li><a href="index.php">Home</a></li>
-<li><a href="products.php">Products</a></li>
-<li><a href="cart.php">Cart</a></li>
-<li><a href="login.php">Login</a></li>
+            </ul>
 
-</ul>
+        </div>
 
-</div>
+        <div class="footer-section">
 
-<div class="footer-section">
+            <h3>Contact</h3>
 
-<h3>Contact</h3>
+            <p>Email: info@petverse.com</p>
 
-<p>Email: info@petverse.com</p>
+            <p>Phone: +250 788 000 000</p>
 
-<p>Phone: +250 788 000 000</p>
+            <p>Kigali, Rwanda</p>
 
-<p>Kigali, Rwanda</p>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-
-<p>
-© 2026 PetVerse Store.
-All Rights Reserved.
-</p>
-
-</div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>
+        © 2026 PetVerse Store.
+        All Rights Reserved.
+        </p>
+    </div>
 
 </footer>
 </body>
