@@ -151,7 +151,7 @@
                 <button
                     type="submit"
                     name="login"
-                    class="btn">
+                    class="btn register-btn">
 
                     Login
 

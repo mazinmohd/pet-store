@@ -93,7 +93,9 @@
 
     <?php while($product = mysqli_fetch_assoc($result)){ ?>
 
-    <div class="product-card">
+    <div class="product-card"
+     data-name="<?php echo strtolower($product['name']); ?>"
+     data-category="<?php echo strtolower($product['category']); ?>">
 
         <img
         src="assets/images/<?php echo $product['image']; ?>"
@@ -240,6 +242,39 @@
         });
 
     });
+
+const searchInput =
+document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function(){
+
+    let searchValue =
+    this.value.toLowerCase();
+
+    let products =
+    document.querySelectorAll(".product-card");
+
+    products.forEach(product => {
+
+        let name =
+        product.dataset.name;
+
+        let category =
+        product.dataset.category;
+
+        if(
+            name.includes(searchValue) ||
+            category.includes(searchValue)
+        ){
+            product.style.display = "block";
+        }
+        else{
+            product.style.display = "none";
+        }
+
+    });
+
+});
 </script>
 </body>
 </html>

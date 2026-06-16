@@ -384,11 +384,20 @@ text-align:center;
 }
 
 #searchInput{
-width:500px;
+width:600px;
 max-width:90%;
-padding:15px;
-border-radius:10px;
-border:1px solid #ddd;
+padding:16px 20px;
+border-radius:50px;
+border:2px solid #e5e7eb;
+font-size:16px;
+outline:none;
+transition:.3s;
+box-shadow:0 5px 15px rgba(0,0,0,.05);
+}
+
+#searchInput:focus{
+border-color:#2f855a;
+box-shadow:0 0 15px rgba(47,133,90,.2);
 }
 
 .products-container{

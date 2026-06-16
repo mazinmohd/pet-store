@@ -156,7 +156,7 @@
                 <button
                 type="submit"
                 name="register"
-                class="btn">
+                class="btn register-btn">
 
                 Register
 
