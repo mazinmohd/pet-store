@@ -1,16 +1,15 @@
 <?php
 
-$host = "localhost";
+$host = "db";
 $user = "root";
-$password = "";
-$database = "pet-store";
+$password = "root";
+$database = "pet_store";
 
 $conn = mysqli_connect(
     $host,
     $user,
     $password,
-    $database,
-    3307
+    $database
 );
 
 if(!$conn){
