@@ -1,6 +1,6 @@
 <?php
 
-$host = "db";
+$host = "petverse-db";
 $user = "root";
 $password = "root";
 $database = "pet_store";

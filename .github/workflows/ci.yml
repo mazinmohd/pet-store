@@ -1,0 +1,39 @@
+name: PetVerse CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t petverse .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d \
+          --name petverse-test \
+          -p 8080:80 \
+          petverse
+
+      - name: Check Running Containers
+        run: docker ps
+
+      - name: Stop Container
+        run: docker stop petverse-test
+
+      - name: Remove Container
+        run: docker rm petverse-test

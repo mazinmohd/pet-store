@@ -13,31 +13,31 @@ navbar.style.background = "#fff";
 });
 
 
-const searchInput =
-document.getElementById("searchInput");
+// const searchInput =
+// document.getElementById("searchInput");
 
-searchInput.addEventListener("keyup", ()=>{
+// searchInput.addEventListener("keyup", ()=>{
 
-let filter =
-searchInput.value.toLowerCase();
+// let filter =
+// searchInput.value.toLowerCase();
 
-let cards =
-document.querySelectorAll(".product-card");
+// let cards =
+// document.querySelectorAll(".product-card");
 
-cards.forEach(card=>{
+// cards.forEach(card=>{
 
-let text =
-card.innerText.toLowerCase();
+// let text =
+// card.innerText.toLowerCase();
 
-if(text.includes(filter)){
-card.style.display="block";
-}else{
-card.style.display="none";
-}
+// if(text.includes(filter)){
+// card.style.display="block";
+// }else{
+// card.style.display="none";
+// }
 
-});
+// });
 
-});
+// });
 
 function increaseQty(){
 
